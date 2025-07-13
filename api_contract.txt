@@ -1,0 +1,58 @@
+API CONTRACT: User-Based File Storage System
+=============================================
+
+Base URL: http://<server-address>/
+
+1. Upload File
+--------------
+- Endpoint: POST /upload/<username>
+- Description: Upload a file for a specific user. User is created automatically if not present.
+- Path Parameter:
+    - username (string): The username for whom the file is being uploaded.
+- Form Data:
+    - file (file): The file to upload. Supported types: txt, png, jpg, jpeg, json
+- Response (Success: 200):
+    {
+        "message": "File uploaded successfully"
+    }
+- Response (Error: 400):
+    {
+        "error": "No file part" | "No selected file" | "Unsupported file type"
+    }
+
+2. List User Files
+------------------
+- Endpoint: GET /files/<username>
+- Description: List all files uploaded by the specified user.
+- Path Parameter:
+    - username (string): The username whose files to list.
+- Response (Success: 200):
+    [
+        {
+            "filename": "string",
+            "filepath": "string",
+            "size": number
+        },
+        ...
+    ]
+
+3. Download File
+----------------
+- Endpoint: GET /files/<username>/<filename>
+- Description: Download a specific file for the specified user.
+- Path Parameters:
+    - username (string): The username who owns the file.
+    - filename (string): The name of the file to download.
+- Response (Success: 200):
+    - Returns the file as an attachment.
+- Response (Error: 404):
+    {
+        "error": "User not found" | "File not found"
+    }
+
+Notes:
+------
+- All file uploads are stored in /uploads/<username>/
+- Only the allowed file types are accepted.
+- All responses are JSON except for file downloads, which return the file directly.
+- User is created automatically on first upload if not present. 
