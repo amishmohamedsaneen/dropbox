@@ -3,7 +3,7 @@ import os
 from database import create_user, add_file_to_user, get_user_files
 
 UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'txt', 'png', 'jpg', 'jpeg', 'json'}
+ALLOWED_EXTENSIONS = {'txt', 'png', 'jpg', 'jpeg', 'json','pdf', 'csv'}
 
 routes = Blueprint('routes', __name__)
 

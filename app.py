@@ -14,4 +14,5 @@ app.register_blueprint(routes)
 app.register_blueprint(serve)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run(host="0.0.0.0", port=5050)
